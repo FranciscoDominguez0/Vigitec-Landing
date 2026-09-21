@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
 
@@ -16,7 +16,7 @@ export default function Cotizacion() {
         if (captchaRef.current && captchaRef.current.children.length === 0) {
           try {
             (window as any).grecaptcha.render(captchaRef.current, {
-              sitekey: '6LeX3GstAAAAAK2cUkoO3gRuQDpIdvrYgj1iVTHs',
+              sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
               theme: 'dark'
             });
           } catch (err) {
@@ -26,6 +26,13 @@ export default function Cotizacion() {
       });
     }
   };
+
+  useEffect(() => {
+    // Si regresamos a esta página y el script de reCAPTCHA ya estaba cargado, lo renderizamos manualmente.
+    if ((window as any).grecaptcha) {
+      handleScriptLoad();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,7 +50,7 @@ export default function Cotizacion() {
     const formData = new FormData(e.currentTarget);
     const data = {
       Nombre: formData.get('Nombre'),
-      Teléfono: formData.get('Teléfono'),
+      Telefono: formData.get('Telefono'),
       Email: formData.get('Email'),
       Servicio: formData.get('Servicio'),
       Detalles: formData.get('Detalles'),
@@ -130,7 +137,7 @@ export default function Cotizacion() {
                         <input type="text" name="Nombre" className="w-full p-4 bg-[#111111] border border-gray-700 text-white focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all shadow-inner placeholder-gray-500 font-medium rounded" placeholder="Nombre Completo*" required />
                       </div>
                       <div>
-                        <input type="tel" name="Teléfono" className="w-full p-4 bg-[#111111] border border-gray-700 text-white focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all shadow-inner placeholder-gray-500 font-medium rounded" placeholder="Teléfono*" required />
+                        <input type="tel" name="Telefono" className="w-full p-4 bg-[#111111] border border-gray-700 text-white focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all shadow-inner placeholder-gray-500 font-medium rounded" placeholder="Teléfono*" required />
                       </div>
                     </div>
                     

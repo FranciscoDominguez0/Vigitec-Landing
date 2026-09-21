@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   title: "Vigitec Panamá - Sistemas de Seguridad Premium",
   description: "Vigitec Panamá - Especialistas en sistemas de seguridad premium. Instalación de cámaras, alarmas, control de acceso y mantenimiento con soporte 24/7.",
   keywords: "sistemas de seguridad panamá, cámaras de seguridad, instalación de cámaras, alarmas panamá, control de acceso, mantenimiento de seguridad",
+  authors: [{ name: "Francisco Dominguez" }],
+  creator: "Francisco Dominguez",
+  publisher: "Francisco Dominguez",
   openGraph: {
     type: "website",
     url: "https://vigitecpanama.com/",
@@ -31,6 +34,9 @@ export const metadata: Metadata = {
     description: "Vigitec Panamá - Especialistas en sistemas de seguridad premium. Instalación de cámaras, alarmas, control de acceso y mantenimiento con soporte 24/7.",
     images: ["https://vigitecpanama.com/assets/img/hero/servicios_bg.png"],
   },
+  other: {
+    "creation-date": "2026-09-20",
+  }
 };
 
 export default function RootLayout({
