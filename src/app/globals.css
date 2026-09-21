@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #111111;
+  --color-secondary: #1A1A1A;
+  --color-accent: #E63946;
+  --color-accentHover: #D90429;
+  --color-light: #F8F9FA;
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --shadow-premium: 0 20px 40px -15px rgba(0,0,0,0.05);
+  --shadow-red-glow: 0 10px 25px -5px rgba(230, 57, 70, 0.4);
+}
+
+@layer base {
+  body {
+    @apply bg-white text-gray-800 font-sans antialiased selection:bg-accent selection:text-white scroll-smooth;
+  }
+}
+
