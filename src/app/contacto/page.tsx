@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 
 export default function Contacto() {
   return (
@@ -63,17 +63,26 @@ export default function Contacto() {
 
           </div>
 
-          {/* Mapa de Google */}
-          <div className="w-full aspect-square md:aspect-[4/3] rounded-xl overflow-hidden border border-gray-700 shadow-inner relative bg-[#1A1A1A]">
+          {/* Mapa de Google Profesional */}
+          <div className="w-full aspect-square md:aspect-[4/3] rounded-xl overflow-hidden border border-gray-700 shadow-inner relative bg-[#111111] group">
+            
+            {/* Animación de Carga (Skeleton) */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#1A1A1A] animate-pulse z-0">
+              <svg className="w-10 h-10 text-gray-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <span className="text-gray-600 text-xs font-semibold uppercase tracking-widest">Cargando Mapa...</span>
+            </div>
+
             <iframe 
+              title="Ubicación Vigitec"
               width="100%" 
               height="100%" 
               frameBorder="0" 
               scrolling="no" 
               marginHeight={0} 
               marginWidth={0} 
-              src="https://maps.google.com/maps?q=8.247867235663374,-80.5427422981597&t=&z=16&ie=UTF8&iwloc=&output=embed"
-              className="w-full h-full absolute inset-0 z-10 transition-opacity duration-1000"
+              loading="lazy"
+              src="https://maps.google.com/maps?q=Vigitec%20Panama,%20Aguadulce&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              className="w-full h-full absolute inset-0 z-10 transition-all duration-700 ease-in-out"
             ></iframe>
           </div>
 
