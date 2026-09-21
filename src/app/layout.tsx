@@ -15,8 +15,8 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Vigitec Panamá - Sistemas de Seguridad Premium",
-  description: "Vigitec Panamá - Especialistas en sistemas de seguridad premium. Instalación de cámaras, alarmas, control de acceso y mantenimiento con soporte 24/7.",
+  title: "Vigitec Panamá",
+  description: "Vigitec Panamá - Especialistas en sistemas de seguridad. Instalación de cámaras, alarmas, control de acceso y mantenimiento con soporte 24/7.",
   keywords: "sistemas de seguridad panamá, cámaras de seguridad, instalación de cámaras, alarmas panamá, control de acceso, mantenimiento de seguridad",
   authors: [{ name: "Francisco Dominguez" }],
   creator: "Francisco Dominguez",
@@ -24,18 +24,20 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://vigitecpanama.com/",
-    title: "Vigitec Panamá - Sistemas de Seguridad Premium",
-    description: "Vigitec Panamá - Especialistas en sistemas de seguridad premium. Instalación de cámaras, alarmas, control de acceso y mantenimiento con soporte 24/7.",
+    title: "Vigitec Panamá",
+    description: "Vigitec Panamá - Especialistas en sistemas de seguridad. Instalación de cámaras, alarmas, control de acceso y mantenimiento con soporte 24/7.",
     images: ["https://vigitecpanama.com/assets/img/hero/servicios_bg.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vigitec Panamá - Sistemas de Seguridad Premium",
-    description: "Vigitec Panamá - Especialistas en sistemas de seguridad premium. Instalación de cámaras, alarmas, control de acceso y mantenimiento con soporte 24/7.",
+    title: "Vigitec Panamá",
+    description: "Vigitec Panamá - Especialistas en sistemas de seguridad. Instalación de cámaras, alarmas, control de acceso y mantenimiento con soporte 24/7.",
     images: ["https://vigitecpanama.com/assets/img/hero/servicios_bg.png"],
   },
   other: {
     "creation-date": "2026-09-20",
+    "date": "2026-09-20",
+    "revised": "2026-09-20"
   }
 };
 
