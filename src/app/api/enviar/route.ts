@@ -46,9 +46,9 @@ export async function POST(request: Request) {
     const emailHtml = generarTemplateContacto(cliente, Servicio, Detalles);
 
     const emailResponse = await resend.emails.send({
-      from: 'Vigitec Web <onboarding@resend.dev>',
+      from: 'Portal Web <onboarding@resend.dev>',
       to: destination,
-      subject: 'Vigitec - Nuevo Mensaje de Contacto',
+      subject: 'Portal Web - Nuevo Mensaje de Contacto',
       html: emailHtml
     });
 
