@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import SkeletonImage from '@/components/SkeletonImage';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -46,7 +47,7 @@ export default function Home() {
               
               {/* Imagen Principal del Técnico */}
               <div className="relative z-10 w-full aspect-[4/5] overflow-hidden rounded-[2rem] rounded-tr-none shadow-2xl border-4 border-secondary">
-                <Image src="/assets/img/hero/tecnico_instalador_v2.webp" alt="Técnico Instalando Sistema de Seguridad" fill priority className="object-cover" />
+                <SkeletonImage src="/assets/img/hero/tecnico_instalador_v2.webp" alt="Técnico Instalando Sistema de Seguridad" fill priority className="object-cover" />
               </div>
               
               {/* Etiqueta Flotante de Soporte 24/7 */}
