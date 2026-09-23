@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import RenovableSolarHero from "@/components/RenovableSolarHero";
 import KitsSection from "@/components/KitsSection";
 
 export const metadata: Metadata = {
@@ -10,7 +9,6 @@ export const metadata: Metadata = {
 export default function RenovableSolarPage() {
   return (
     <main>
-      <RenovableSolarHero />
       <KitsSection />
     </main>
   );
