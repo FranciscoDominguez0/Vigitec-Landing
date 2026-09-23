@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const Nombre = body.Nombre || body.nombre;
-    const Telefono = body['Teléfono'] || body['Telefono'] || body.telefono;
+    const Telefono = body.Telefono || body.telefono || body['Teléfono'] || body['TelǸfono'] || '';
     const Email = body.Email || body.email;
     const Servicio = body.Servicio || body.servicio;
     const Detalles = body.Detalles || body.detalles;
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     const recaptchaData = await recaptchaRes.json();
 
     if (!recaptchaData.success) {
-      return NextResponse.json({ success: false, message: 'Fallo la verificación de reCAPTCHA.' }, { status: 400 });
+      return NextResponse.json({ success: false, message: 'Fallo la verificacion de reCAPTCHA.' }, { status: 400 });
     }
 
     const destination = process.env.SMTP_DESTINATION || 'dominguezf225@gmail.com';
@@ -33,10 +33,10 @@ export async function POST(request: Request) {
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #E63946; padding: 20px; text-align: center;">
-          <h2 style="color: #ffffff; margin: 0; font-size: 24px;">Nueva Cotización Web</h2>
+          <h2 style="color: #ffffff; margin: 0; font-size: 24px;">Nueva Cotizacion Web</h2>
         </div>
         <div style="padding: 20px; background-color: #f9f9f9;">
-          <p style="font-size: 16px; margin-bottom: 20px;">Has recibido una nueva solicitud de cotización desde <strong>Vigitec Panamá</strong>.</p>
+          <p style="font-size: 16px; margin-bottom: 20px;">Has recibido una nueva solicitud de cotizacion desde <strong>Vigitec Panama</strong>.</p>
           
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
             <tr>
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
               <td style="padding: 10px; border-bottom: 1px solid #ddd;">${Nombre}</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Teléfono:</strong></td>
+              <td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Telefono:</strong></td>
               <td style="padding: 10px; border-bottom: 1px solid #ddd;">${Telefono}</td>
             </tr>
             <tr>
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
           </div>
         </div>
         <div style="background-color: #1A1A1A; padding: 15px; text-align: center; font-size: 12px; color: #aaa;">
-          Este correo fue generado automáticamente desde el formulario de contacto de vigitecpanama.com.
+          Este correo fue generado automaticamente desde el formulario de contacto de vigitecpanama.com.
         </div>
       </div>
     `;
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
     const emailResponse = await resend.emails.send({
       from: 'Vigitec Web <onboarding@resend.dev>',
       to: [destination],
-      subject: `Nueva Cotización: ${Servicio} - ${Nombre}`,
+      subject: `Nueva Cotizacion: ${Servicio} - ${Nombre}`,
       html: emailHtml
     });
 
@@ -82,7 +82,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, message: 'Error enviando el correo.' }, { status: 500 });
     }
 
-    return NextResponse.json({ success: true, message: 'Cotización enviada exitosamente.' });
+    return NextResponse.json({ success: true, message: 'Cotizacion enviada exitosamente.' });
   } catch (error) {
     console.error('Error general en la API:', error);
     return NextResponse.json({ success: false, message: 'Error interno del servidor.' }, { status: 500 });
