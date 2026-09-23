@@ -39,7 +39,7 @@ export default function RenovableSolarHero() {
 
             {/* Imagen Principal de la Casa en Caja */}
             <div className="relative z-10 w-full overflow-hidden rounded-[2rem] shadow-2xl border-4 border-gray-800 bg-gray-900 flex items-center justify-center aspect-square">
-               <Image src="/assets/img/hero/hero_house.jpg?v=2" alt="Casa con Paneles Solares" fill className="object-cover" />
+               <Image src="/assets/img/hero/hero_house.jpg" alt="Casa con Paneles Solares" fill className="object-cover" />
             </div>
 
           </div>
