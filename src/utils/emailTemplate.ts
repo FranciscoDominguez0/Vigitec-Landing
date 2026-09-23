@@ -76,7 +76,7 @@ export function generarTemplateContacto(cliente: DatosCliente, servicio: string,
   return `
     <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
       <div style="background-color: #1A1A1A; padding: 20px; text-align: center; border-bottom: 4px solid #E63946;">
-        <h2 style="color: #ffffff; margin: 0; font-size: 24px;">Vigitec Panama</h2>
+        <h2 style="color: #ffffff; margin: 0; font-size: 24px;">Vigi-Solar</h2>
         <p style="color: #aaaaaa; margin: 5px 0 0 0; font-size: 14px;">Nuevo Mensaje de Contacto</p>
       </div>
       <div style="padding: 20px; background-color: #ffffff;">
@@ -98,7 +98,7 @@ export function generarTemplateContacto(cliente: DatosCliente, servicio: string,
         </div>
       </div>
       <div style="background-color: #f9f9f9; padding: 15px; text-align: center; font-size: 12px; color: #888; border-top: 1px solid #eee;">
-        Este correo fue generado autom&aacute;ticamente desde el formulario de contacto en vigitecpanama.com.
+        Este correo fue generado autom&aacute;ticamente desde el sitio web.
       </div>
     </div>
   `;
