@@ -77,7 +77,7 @@ export default function KitsSection() {
 
         <div className="grid grid-cols-1 gap-12">
           {kits.map((kit, idx) => (
-            <KitCard key={idx} {...kit} />
+            <KitCard key={idx} {...kit} priority={idx < 2} />
           ))}
         </div>
       </div>

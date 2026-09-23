@@ -12,7 +12,7 @@ export default function QuienesSomos() {
     <section className="relative min-h-screen flex items-center justify-center pt-24 pb-20">
       {/* Imagen de fondo */}
       <div className="absolute inset-0 z-0">
-        <Image src="/assets/img/hero/servicios_bg.png" alt="Vigitec Background" fill className="object-cover" />
+        <Image src="/assets/img/hero/servicios_bg.png" alt="Vigitec Background" fill priority className="object-cover" />
       </div>
       
       {/* Contenido */}

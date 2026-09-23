@@ -49,6 +49,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${inter.variable} ${plusJakartaSans.variable}`}>
+      <head>
+        <link rel="preload" href="/assets/img/hero/servicios_bg.png" as="image" fetchPriority="high" />
+      </head>
       <body className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow">
