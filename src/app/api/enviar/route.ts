@@ -1,17 +1,22 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
   try {
+    const resendApiKey = process.env.RESEND_API_KEY;
+    if (!resendApiKey) {
+      return NextResponse.json({ success: false, message: 'Error de configuracion' }, { status: 500 });
+    }
+
+    const resend = new Resend(resendApiKey);
+
     const body = await request.json();
-    const Nombre = body.Nombre || body.nombre;
-    const Telefono = body.Telefono || body.telefono || body['Teléfono'] || body['TelǸfono'] || '';
-    const Email = body.Email || body.email;
-    const Servicio = body.Servicio || body.servicio;
-    const Detalles = body.Detalles || body.detalles;
-    const recaptchaResponse = body.recaptchaResponse;
+    const Nombre = (body.Nombre || body.nombre || '').trim();
+    const Telefono = (body.Telefono || body.telefono || body['Teléfono'] || body['TelǸfono'] || '').trim();
+    const Email = (body.Email || body.email || '').trim();
+    const Servicio = (body.Servicio || body.servicio || '').trim();
+    const Detalles = (body.Detalles || body.detalles || '').trim();
+    const recaptchaResponse = body.recaptchaResponse || '';
 
     const secretKey = process.env.RECAPTCHA_SECRET_KEY;
     
@@ -33,10 +38,10 @@ export async function POST(request: Request) {
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #E63946; padding: 20px; text-align: center;">
-          <h2 style="color: #ffffff; margin: 0; font-size: 24px;">Nueva Cotizacion Web</h2>
+          <h2 style="color: #ffffff; margin: 0; font-size: 24px;">Vigitec Panama</h2>
         </div>
         <div style="padding: 20px; background-color: #f9f9f9;">
-          <p style="font-size: 16px; margin-bottom: 20px;">Has recibido una nueva solicitud de cotizacion desde <strong>Vigitec Panama</strong>.</p>
+          <p style="font-size: 16px; margin-bottom: 20px;">Has recibido un nuevo mensaje de contacto.</p>
           
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
             <tr>
@@ -61,19 +66,19 @@ export async function POST(request: Request) {
 
           <h3 style="color: #E63946; margin-top: 20px; margin-bottom: 10px;">Mensaje / Detalles:</h3>
           <div style="background-color: #ffffff; padding: 15px; border: 1px solid #eee; border-radius: 4px; font-style: italic; color: #555;">
-            ${Detalles ? Detalles.replace(/\n/g, '<br>') : ''}
+            ${Detalles ? Detalles.replace(/\n/g, '<br>') : 'Sin detalles'}
           </div>
         </div>
         <div style="background-color: #1A1A1A; padding: 15px; text-align: center; font-size: 12px; color: #aaa;">
-          Este correo fue generado automaticamente desde el formulario de contacto de vigitecpanama.com.
+          Notificacion automatica del sitio web.
         </div>
       </div>
     `;
 
     const emailResponse = await resend.emails.send({
       from: 'Vigitec Web <onboarding@resend.dev>',
-      to: [destination],
-      subject: `Nueva Cotizacion: ${Servicio} - ${Nombre}`,
+      to: destination,
+      subject: 'Vigitec - Nuevo Mensaje de Contacto',
       html: emailHtml
     });
 
