@@ -36,47 +36,19 @@ export async function POST(request: Request) {
     const destination = process.env.SMTP_DESTINATION || 'dominguezf225@gmail.com';
 
     const emailHtml = `
-      <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-        <div style="background-color: #E63946; padding: 20px; text-align: center;">
-          <h2 style="color: #ffffff; margin: 0; font-size: 24px;">Vigitec Panama</h2>
-        </div>
-        <div style="padding: 20px; background-color: #f9f9f9;">
-          <p style="font-size: 16px; margin-bottom: 20px;">Has recibido un nuevo mensaje de contacto.</p>
-          
-          <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd; width: 30%;"><strong>Nombre:</strong></td>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;">${Nombre}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Telefono:</strong></td>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;">${Telefono}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Email:</strong></td>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;">${Email}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Servicio:</strong></td>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;">
-                <span style="background-color: #1A1A1A; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 14px;">${Servicio}</span>
-              </td>
-            </tr>
-          </table>
-
-          <h3 style="color: #E63946; margin-top: 20px; margin-bottom: 10px;">Mensaje / Detalles:</h3>
-          <div style="background-color: #ffffff; padding: 15px; border: 1px solid #eee; border-radius: 4px; font-style: italic; color: #555;">
-            ${Detalles ? Detalles.replace(/\n/g, '<br>') : 'Sin detalles'}
-          </div>
-        </div>
-        <div style="background-color: #1A1A1A; padding: 15px; text-align: center; font-size: 12px; color: #aaa;">
-          Notificacion automatica del sitio web.
-        </div>
-      </div>
+      <h2>Nuevo Mensaje de Contacto</h2>
+      <p>Has recibido una solicitud desde la web.</p>
+      <ul>
+        <li><strong>Nombre:</strong> ${Nombre}</li>
+        <li><strong>Telefono:</strong> ${Telefono}</li>
+        <li><strong>Email:</strong> ${Email}</li>
+        <li><strong>Servicio:</strong> ${Servicio}</li>
+      </ul>
+      <p><strong>Detalles:</strong><br/>${Detalles ? Detalles.replace(/\n/g, '<br>') : 'Sin detalles'}</p>
     `;
 
     const emailResponse = await resend.emails.send({
-      from: 'Vigitec Web <onboarding@resend.dev>',
+      from: 'onboarding@resend.dev',
       to: destination,
       subject: 'Vigitec - Nuevo Mensaje de Contacto',
       html: emailHtml
