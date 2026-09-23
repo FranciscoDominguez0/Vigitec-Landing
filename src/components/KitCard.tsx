@@ -26,8 +26,8 @@ export default function KitCard({
 }: KitCardProps) {
   return (
     <div className={`bg-[#1a1a1a] border border-gray-800 rounded-2xl overflow-hidden hover:border-accent transition-colors duration-500 group flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} h-full items-stretch`}>
-      <div className="w-full md:w-2/5 relative min-h-[300px]">
-        <Image src={imagenSrc} alt={`${titulo} (${potencia})`} fill className="object-cover" />
+      <div className="w-full md:w-2/5 flex">
+        <Image src={imagenSrc} alt={`${titulo} (${potencia})`} width={800} height={800} className="w-full h-auto md:h-full object-contain" />
       </div>
       <div className="p-8 flex flex-col w-full md:w-3/5">
         <div className={`mb-6 ${reverse ? 'mt-4 md:mt-0' : ''}`}>
