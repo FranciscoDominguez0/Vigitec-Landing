@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   try {
     const resendApiKey = process.env.RESEND_API_KEY;
     if (!resendApiKey) {
-      return NextResponse.json({ success: false, message: 'Error de configuración del servidor de correos.' });
+      return NextResponse.json({ success: false, message: 'Error de configuracion del servidor de correos.' });
     }
 
     const resend = new Resend(resendApiKey);
@@ -17,9 +17,9 @@ export async function POST(req: Request) {
 
     const cliente = {
       nombre: (body.Nombre || '').trim(),
-      cedula: (body['Cédula'] || body['Cédula'] || body['Cedula'] || '').trim(),
-      telefono: (body['Teléfono'] || body['Teléfono'] || body['Telefono'] || '').trim(),
-      direccion: (body['Dirección'] || body['Dirección'] || body['Direccion'] || '').trim()
+      cedula: (body.Cedula || body.cedula || body['Cédula'] || '').trim(),
+      telefono: (body.Telefono || body.telefono || body['Teléfono'] || '').trim(),
+      direccion: (body.Direccion || body.direccion || body['Dirección'] || '').trim()
     };
     
     const servicio = (body.Servicio || '').trim();
@@ -43,18 +43,18 @@ export async function POST(req: Request) {
       });
       const verifyData = await verifyResponse.json();
       if (!verifyData.success) {
-        return NextResponse.json({ success: false, message: 'Verificación de seguridad fallida. Inténtelo de nuevo.' });
+        return NextResponse.json({ success: false, message: 'Verificacion de seguridad fallida. Intentelo de nuevo.' });
       }
     }
 
     const finanzas = calcularFinanciamiento(servicio, anos);
     const htmlMensaje = generarTemplateCorreo(cliente, servicio, finanzas);
     
-    const correoDestino = process.env.SMTP_DESTINATION || 'info@vigitecpanama.com';
-    const asunto = 'NUEVA SOLICITUD DE COTIZACIÓN - Vigi-Solar';
+    const correoDestino = process.env.SMTP_DESTINATION || 'dominguezf225@gmail.com';
+    const asunto = 'Vigi-Solar - Nueva Solicitud de Cotizacion';
 
     const result = await resend.emails.send({
-      from: 'onboarding@resend.dev',
+      from: 'Vigitec Web <onboarding@resend.dev>',
       to: correoDestino,
       subject: asunto,
       html: htmlMensaje
@@ -62,12 +62,12 @@ export async function POST(req: Request) {
 
     if (result.error) {
       console.error(result.error);
-      return NextResponse.json({ success: false, message: 'Error al enviar a través de Resend. Inténtelo más tarde.' });
+      return NextResponse.json({ success: false, message: 'Error al enviar a traves de Resend. Intentelo mas tarde.' });
     }
 
     return NextResponse.json({ success: true, message: '' });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ success: false, message: 'Ha ocurrido un error inesperado. Inténtelo más tarde.' });
+    return NextResponse.json({ success: false, message: 'Ha ocurrido un error inesperado. Intentelo mas tarde.' });
   }
 }
