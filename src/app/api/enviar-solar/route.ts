@@ -17,9 +17,9 @@ export async function POST(req: Request) {
 
     const cliente = {
       nombre: (body.Nombre || '').trim(),
-      cedula: (body['Cédula'] || '').trim(),
-      telefono: (body['Teléfono'] || '').trim(),
-      direccion: (body['Dirección'] || '').trim()
+      cedula: (body['Cédula'] || body['Cédula'] || body['Cedula'] || '').trim(),
+      telefono: (body['Teléfono'] || body['Teléfono'] || body['Telefono'] || '').trim(),
+      direccion: (body['Dirección'] || body['Dirección'] || body['Direccion'] || '').trim()
     };
     
     const servicio = (body.Servicio || '').trim();
