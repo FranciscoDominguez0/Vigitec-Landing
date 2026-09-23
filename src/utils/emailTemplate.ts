@@ -86,7 +86,6 @@ export function generarTemplateContacto(cliente: DatosCliente, servicio: string,
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
           <tr><td style="padding: 10px; border-bottom: 1px solid #ddd; width: 40%;"><strong>Nombre:</strong></td><td style="padding: 10px; border-bottom: 1px solid #ddd;">${cliente.nombre}</td></tr>
           <tr><td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Tel&eacute;fono:</strong></td><td style="padding: 10px; border-bottom: 1px solid #ddd;">${cliente.telefono}</td></tr>
-          <tr><td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Email:</strong></td><td style="padding: 10px; border-bottom: 1px solid #ddd;">${cliente.cedula}</td></tr>
           <tr><td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Servicio:</strong></td><td style="padding: 10px; border-bottom: 1px solid #ddd;">
             <span style="background-color: #1A1A1A; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 14px;">${servicio}</span>
           </td></tr>

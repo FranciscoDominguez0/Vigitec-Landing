@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     const cliente: DatosCliente = {
       nombre: Nombre,
       telefono: Telefono,
-      cedula: Email ? Email.replace('@', ' [arroba] ') : 'No provisto', // Obfuscate email to bypass spam/phishing filters
+      cedula: '', // No incluir email en el cuerpo del correo (dispara filtros anti-phishing)
       direccion: ''
     };
 
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
     const emailResponse = await resend.emails.send({
       from: 'Portal Web <onboarding@resend.dev>',
       to: destination,
-      subject: 'Portal Web - Nuevo Mensaje de Contacto',
+      subject: `Portal Web - ${Nombre} - ${Servicio}`,
       html: emailHtml
     });
 
