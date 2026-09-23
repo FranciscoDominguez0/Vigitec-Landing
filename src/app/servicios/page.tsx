@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import SkeletonImage from '@/components/SkeletonImage';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -71,10 +71,11 @@ export default function Servicios() {
           
           {servicios.map((servicio, idx) => (
             <div key={idx} className="relative w-full h-[320px] rounded-2xl overflow-hidden group shadow-2xl border border-gray-800">
-              <Image 
+              <SkeletonImage 
                 src={servicio.img} 
                 alt={servicio.title} 
                 fill
+                priority={idx < 2}
                 className={`object-cover ${servicio.contain ? 'object-contain' : 'object-cover'} ${servicio.bgWhite ? 'bg-white p-4' : ''}`} 
               />
               
