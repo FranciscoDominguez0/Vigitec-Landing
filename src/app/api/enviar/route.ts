@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { generarTemplateContacto, DatosCliente } from '@/utils/emailTemplate';
 
 export async function POST(request: Request) {
   try {
@@ -35,20 +36,17 @@ export async function POST(request: Request) {
 
     const destination = process.env.SMTP_DESTINATION || 'dominguezf225@gmail.com';
 
-    const emailHtml = `
-      <h2>Nuevo Mensaje de Contacto</h2>
-      <p>Has recibido una solicitud desde la web.</p>
-      <ul>
-        <li><strong>Nombre:</strong> ${Nombre}</li>
-        <li><strong>Telefono:</strong> ${Telefono}</li>
-        <li><strong>Email:</strong> ${Email}</li>
-        <li><strong>Servicio:</strong> ${Servicio}</li>
-      </ul>
-      <p><strong>Detalles:</strong><br/>${Detalles ? Detalles.replace(/\n/g, '<br>') : 'Sin detalles'}</p>
-    `;
+    const cliente: DatosCliente = {
+      nombre: Nombre,
+      telefono: Telefono,
+      cedula: Email, // Reusamos el campo cedula del template para enviar el email del usuario
+      direccion: ''
+    };
+
+    const emailHtml = generarTemplateContacto(cliente, Servicio, Detalles);
 
     const emailResponse = await resend.emails.send({
-      from: 'onboarding@resend.dev',
+      from: 'Vigitec Web <onboarding@resend.dev>',
       to: destination,
       subject: 'Vigitec - Nuevo Mensaje de Contacto',
       html: emailHtml
