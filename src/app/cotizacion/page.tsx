@@ -16,7 +16,7 @@ export default function Cotizacion() {
         if (captchaRef.current && captchaRef.current.children.length === 0) {
           try {
             (window as any).grecaptcha.render(captchaRef.current, {
-              sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LeX3GstAAAAAK2cUkoO3gRuQDpIdvrYgj1iVTHs",
+              sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
               theme: 'dark'
             });
           } catch (err) {
