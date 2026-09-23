@@ -63,9 +63,7 @@ export default function KitsSection() {
     <section id="kits" className="pt-32 pb-24 bg-[#111111]">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-20">
-          <div className="inline-block bg-accent/20 border border-accent/30 px-5 py-2 rounded-full mb-6 backdrop-blur-sm shadow-[0_0_15px_rgba(230,57,70,0.3)]">
-            <span className="text-accent font-bold tracking-widest uppercase text-sm">Vigitec Panamá • Renovable Solar</span>
-          </div>
+
           <h1 className="text-4xl lg:text-5xl font-display font-bold text-white mb-6 tracking-tight uppercase drop-shadow-md">
             Energía Limpia, <span className="text-accent">Ahorro Inteligente</span>
           </h1>
