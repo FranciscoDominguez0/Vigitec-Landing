@@ -48,8 +48,7 @@ export async function POST(request: Request) {
     const emailResponse = await resend.emails.send({
       from: 'Vigitec Web <onboarding@resend.dev>',
       to: destination,
-      replyTo: Email || undefined,
-      subject: `Vigitec - Cotizacion de ${Servicio} - ${Nombre}`,
+      subject: 'Vigi-Solar - Nueva Solicitud de Cotizacion',
       html: emailHtml
     });
 
