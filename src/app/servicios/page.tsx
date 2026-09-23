@@ -1,4 +1,11 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Servicios | Vigitec Panamá",
+  description: "Conoce nuestro portafolio de servicios de seguridad, cámaras, renovable solar, facturación electrónica y desarrollo de software.",
+};
 
 export default function Servicios() {
   const servicios = [
@@ -24,11 +31,13 @@ export default function Servicios() {
       bgWhite: true
     },
     {
-      title: "Paneles Solares",
+      title: "Renovable Solar",
       desc: "Soluciones energéticas sostenibles. Instalamos sistemas de energía solar de alta eficiencia para reducir costos operativos y huella de carbono.",
       img: "/assets/img/servicios/paneles solares.webp",
       contain: false,
-      bgWhite: false
+      bgWhite: false,
+      linkText: "Ver",
+      linkHref: "/renovable-solar"
     },
     {
       title: "Sistemas de Alarmas",
@@ -62,10 +71,11 @@ export default function Servicios() {
           
           {servicios.map((servicio, idx) => (
             <div key={idx} className="relative w-full h-[320px] rounded-2xl overflow-hidden group shadow-2xl border border-gray-800">
-              <img 
+              <Image 
                 src={servicio.img} 
                 alt={servicio.title} 
-                className={`absolute inset-0 w-full h-full ${servicio.contain ? 'object-contain' : 'object-cover'} ${servicio.bgWhite ? 'bg-white p-4' : ''}`} 
+                fill
+                className={`object-cover ${servicio.contain ? 'object-contain' : 'object-cover'} ${servicio.bgWhite ? 'bg-white p-4' : ''}`} 
               />
               
               <div className="absolute inset-x-0 bottom-0 bg-black/60 transition-all duration-500 transform translate-y-0 md:translate-y-[calc(100%-4rem)] group-hover:translate-y-0 flex flex-col">
@@ -80,8 +90,8 @@ export default function Servicios() {
                     {servicio.desc}
                   </p>
                   <div className="text-center">
-                    <Link href="/cotizacion" className="inline-block bg-accent text-white font-bold py-2 px-8 rounded hover:bg-white hover:text-accent transition-colors uppercase text-sm tracking-wider shadow-lg">
-                      Cotizar
+                    <Link href={servicio.linkHref || "/cotizacion"} className="inline-block bg-accent text-white font-bold py-2 px-8 rounded hover:bg-white hover:text-accent transition-colors uppercase text-sm tracking-wider shadow-lg">
+                      {servicio.linkText || "Cotizar"}
                     </Link>
                   </div>
                 </div>

@@ -1,11 +1,18 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Quiénes Somos | Vigitec Panamá",
+  description: "Conoce a VIGITEC PANAMA, expertos en sistemas de seguridad con un equipo altamente cualificado y comprometido con la eficiencia.",
+};
 
 export default function QuienesSomos() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-24 pb-20">
       {/* Imagen de fondo */}
       <div className="absolute inset-0 z-0">
-        <img src="/assets/img/hero/servicios_bg.png" alt="Vigitec Background" className="w-full h-full object-cover" />
+        <Image src="/assets/img/hero/servicios_bg.png" alt="Vigitec Background" fill className="object-cover" />
       </div>
       
       {/* Contenido */}

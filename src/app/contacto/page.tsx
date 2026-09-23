@@ -1,4 +1,9 @@
-﻿import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Contacto | Vigitec Panamá",
+  description: "Contáctanos para instalar tus sistemas de seguridad o paneles solares.",
+};
 
 export default function Contacto() {
   return (

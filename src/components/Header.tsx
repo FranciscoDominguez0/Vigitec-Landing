@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
@@ -14,7 +15,7 @@ export default function Header() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <img src="/assets/img/hero/vigitec-logo.webp" alt="Vigitec Panama" className="h-10 w-auto" />
+          <Image src="/assets/img/hero/vigitec-logo.webp" alt="Vigitec Panama" width={200} height={40} className="h-10 w-auto" />
         </Link>
         
         {/* Menú para Computadoras */}

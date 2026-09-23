@@ -1,5 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Inicio | Vigitec Panamá",
+};
 
 export default function Home() {
   return (
@@ -41,7 +46,7 @@ export default function Home() {
               
               {/* Imagen Principal del Técnico */}
               <div className="relative z-10 w-full aspect-[4/5] overflow-hidden rounded-[2rem] rounded-tr-none shadow-2xl border-4 border-secondary">
-                <img src="/assets/img/hero/tecnico_instalador_v2.webp" alt="Técnico Instalando Sistema de Seguridad" className="w-full h-full object-cover" />
+                <Image src="/assets/img/hero/tecnico_instalador_v2.webp" alt="Técnico Instalando Sistema de Seguridad" fill className="object-cover" />
               </div>
               
               {/* Etiqueta Flotante de Soporte 24/7 */}
@@ -84,7 +89,7 @@ export default function Home() {
                 <h3 className="text-2xl font-bold text-white font-display tracking-wide">Servicio de</h3>
               </div>
               <p className="text-gray-400 font-light leading-relaxed text-sm">
-                Instalación de cámaras y mantenimiento en todo el sistema de seguridad, trámites y entrenamiento para facturación electrónica en Panamá, orientación sobre paneles solares. Como también sistemas de incendios con certificación.
+                Instalación de cámaras y mantenimiento en todo el sistema de seguridad, trámites y entrenamiento para facturación electrónica en Panamá, orientación sobre renovable solar. Como también sistemas de incendios con certificación.
               </p>
             </div>
 

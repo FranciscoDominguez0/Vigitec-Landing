@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
 import Script from 'next/script';
 
 export default function Cotizacion() {
@@ -11,11 +10,11 @@ export default function Cotizacion() {
   const captchaRef = useRef<HTMLDivElement>(null);
 
   const handleScriptLoad = () => {
-    if ((window as any).grecaptcha) {
-      (window as any).grecaptcha.ready(() => {
+    if (window.grecaptcha) {
+      window.grecaptcha.ready(() => {
         if (captchaRef.current && captchaRef.current.children.length === 0) {
           try {
-            (window as any).grecaptcha.render(captchaRef.current, {
+            window.grecaptcha.render(captchaRef.current, {
               sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
               theme: 'dark'
             });
@@ -29,16 +28,16 @@ export default function Cotizacion() {
 
   useEffect(() => {
     // Si regresamos a esta página y el script de reCAPTCHA ya estaba cargado, lo renderizamos manualmente.
-    if ((window as any).grecaptcha) {
+    if (window.grecaptcha) {
       handleScriptLoad();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     // Verificar reCAPTCHA
-    const recaptchaResponse = (window as any).grecaptcha?.getResponse();
+    const recaptchaResponse = window.grecaptcha?.getResponse();
     if (!recaptchaResponse) {
       setError('Por favor, marque la casilla de "No soy un robot" antes de enviar la cotización.');
       return;
@@ -71,11 +70,11 @@ export default function Cotizacion() {
       } else {
         setError(result.message || 'Error al enviar la cotización.');
       }
-    } catch (err) {
+    } catch {
       setError('Ocurrió un error de red. Intenta nuevamente.');
     } finally {
       setIsSubmitting(false);
-      (window as any).grecaptcha?.reset();
+      window.grecaptcha?.reset();
     }
   };
 
@@ -152,7 +151,7 @@ export default function Cotizacion() {
                           <option className="text-white">Instalación de Cámaras</option>
                           <option className="text-white">Supervisión 24/7</option>
                           <option className="text-white">Facturación Electrónica</option>
-                          <option className="text-white">Paneles Solares</option>
+                          <option className="text-white">Renovable Solar</option>
                           <option className="text-white">Mantenimiento y Reparaciones</option>
                           <option className="text-white">Otro</option>
                         </select>
