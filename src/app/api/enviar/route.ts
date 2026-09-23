@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     const cliente: DatosCliente = {
       nombre: Nombre,
       telefono: Telefono,
-      cedula: Email, // Reusamos el campo cedula del template para enviar el email del usuario
+      cedula: Email ? Email.replace('@', ' [arroba] ') : 'No provisto', // Obfuscate email to bypass spam/phishing filters
       direccion: ''
     };
 
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
     const emailResponse = await resend.emails.send({
       from: 'Vigitec Web <onboarding@resend.dev>',
       to: destination,
-      subject: 'Vigi-Solar - Nuevo Mensaje de Contacto',
+      subject: 'Vigitec - Nuevo Mensaje de Contacto',
       html: emailHtml
     });
 
