@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -15,6 +15,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vigitecpanama.com/"),
   title: "Vigitec Panamá",
   description: "Vigitec Panamá - Especialistas en sistemas de seguridad. Instalación de cámaras, alarmas, control de acceso y mantenimiento con soporte 24/7.",
   keywords: "sistemas de seguridad panamá, cámaras de seguridad, instalación de cámaras, alarmas panamá, control de acceso, mantenimiento de seguridad",
