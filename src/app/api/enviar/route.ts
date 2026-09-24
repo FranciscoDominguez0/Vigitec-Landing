@@ -48,9 +48,9 @@ export async function POST(request: Request) {
     const emailResponse = await resend.emails.send({
       from: 'Vigitec Web <onboarding@resend.dev>',
       to: destination,
-      subject: 'Vigitec - Nueva Solicitud de Cotizacion',
-      html: emailHtml,
-      text: \`Nueva Solicitud de Cotizacion de \${cliente.nombre}. Telefono: \${cliente.telefono}. Servicio: \${Servicio}.\`
+      subject: 'Vigitec - Nueva Solicitud',
+      // html: emailHtml, // COMENTADO TEMPORALMENTE PARA EVITAR FILTRO DE SPAM
+      text: `NUEVA SOLICITUD - Nombre: ${cliente.nombre} | Telefono: ${cliente.telefono} | Interes: ${Servicio}. Favor contactar al cliente.`
     });
 
     if (emailResponse.error) {
