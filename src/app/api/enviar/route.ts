@@ -50,8 +50,8 @@ export async function POST(request: Request) {
       from: 'Notificacion Web <onboarding@resend.dev>',
       to: destination,
       subject: `Nuevo Mensaje desde la Web #${Math.floor(Math.random() * 10000)}`,
-      html: emailHtml,
-      text: `NUEVO MENSAJE - Nombre: ${cliente.nombre} | Telefono: ${cliente.telefono} | Interes: ${Servicio}. Favor contactar.`
+      // html: emailHtml, // Desactivado temporalmente porque Gmail rechaza el correo con HTML
+      text: `NUEVA SOLICITUD DESDE LA WEB\n\n------------------------------\nDATOS DEL SOLICITANTE\n------------------------------\nNombre: ${cliente.nombre}\nTeléfono: ${cliente.telefono}\nServicio de Interés: ${Servicio}\n\n------------------------------\nDETALLES\n------------------------------\n${Detalles || 'Sin detalles'}\n\nEnviado desde vigitecpanama.com`
     });
 
     if (emailResponse.error) {
