@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { generarTemplateContacto, DatosCliente } from '@/utils/emailTemplate';
+import { DatosCliente } from '@/utils/emailTemplate';
+import { generarTemplateContacto } from '@/utils/contactoTemplate';
 
 export async function POST(request: Request) {
   try {

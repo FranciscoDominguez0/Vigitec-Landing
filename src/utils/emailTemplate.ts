@@ -79,25 +79,4 @@ export function generarTemplateCorreo(cliente: DatosCliente, servicio: string, f
 </html>`;
 }
 
-export function generarTemplateContacto(cliente: DatosCliente, servicio: string, detalles: string) {
-  return `<!DOCTYPE html>
-<html>
-<body style="font-family: sans-serif; color: #333; line-height: 1.5;">
-  <h2 style="color: #E63946;">Vigitec Panama - Nueva Solicitud</h2>
-  <p>Has recibido una nueva solicitud de cotizaci&oacute;n desde la web.</p>
-  
-  <h3 style="color: #1A1A1A;">Datos del Solicitante:</h3>
-  <ul>
-    <li><strong>Nombre:</strong> ${cliente.nombre}</li>
-    <li><strong>Tel&eacute;fono:</strong> ${cliente.telefono}</li>
-    <li><strong>Servicio de Inter&eacute;s:</strong> ${servicio}</li>
-  </ul>
-  
-  <h3 style="color: #1A1A1A;">Detalles Adicionales:</h3>
-  <p>${detalles || 'Sin detalles'}</p>
-  
-  <hr style="border: 0; border-top: 1px solid #ccc; margin-top: 20px;">
-  <p style="font-size: 12px; color: #666;">Enviado autom&aacute;ticamente desde vigitecpanama.com</p>
-</body>
-</html>`;
-}
+
