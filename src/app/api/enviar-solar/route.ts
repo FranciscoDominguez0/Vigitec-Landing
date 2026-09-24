@@ -57,7 +57,8 @@ export async function POST(req: Request) {
       from: 'Vigitec Web <onboarding@resend.dev>',
       to: correoDestino,
       subject: asunto,
-      html: htmlMensaje
+      html: htmlMensaje,
+      text: \`Nueva Solicitud de Cotizacion de \${cliente.nombre}. Telefono: \${cliente.telefono}. Servicio: \${servicio}.\`
     });
 
     if (result.error) {
