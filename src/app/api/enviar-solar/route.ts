@@ -57,7 +57,7 @@ export async function POST(req: Request) {
       from: 'Vigitec Web <onboarding@resend.dev>',
       to: correoDestino,
       subject: asunto,
-      // html: htmlMensaje, // COMENTADO TEMPORALMENTE PARA EVITAR FILTRO DE SPAM
+      html: htmlMensaje,
       text: `NUEVA SOLICITUD - Nombre: ${cliente.nombre} | Telefono: ${cliente.telefono} | Interes: ${servicio}. Favor contactar al cliente.`
     });
 
