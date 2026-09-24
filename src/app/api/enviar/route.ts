@@ -47,11 +47,11 @@ export async function POST(request: Request) {
     const emailHtml = generarTemplateContacto(cliente, Servicio, Detalles);
 
     const emailResponse = await resend.emails.send({
-      from: 'Vigitec Web <onboarding@resend.dev>',
+      from: 'Notificacion Web <onboarding@resend.dev>',
       to: destination,
-      subject: `Vigitec - Cotización Web #${Math.floor(Math.random() * 10000)}`,
+      subject: `Nuevo Mensaje desde la Web #${Math.floor(Math.random() * 10000)}`,
       html: emailHtml,
-      text: `NUEVA SOLICITUD - Nombre: ${cliente.nombre} | Telefono: ${cliente.telefono} | Interes: ${Servicio}. Favor contactar al cliente.`
+      text: `NUEVO MENSAJE - Nombre: ${cliente.nombre} | Telefono: ${cliente.telefono} | Interes: ${Servicio}. Favor contactar.`
     });
 
     if (emailResponse.error) {

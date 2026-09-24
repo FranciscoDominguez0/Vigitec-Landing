@@ -5,13 +5,13 @@ export function generarTemplateContacto(cliente: DatosCliente, servicio: string,
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Vigitec Panama - Nueva Solicitud</title>
+  <title>Nuevo Mensaje - Formulario Web</title>
 </head>
 <body>
   <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
     <div style="background-color: #1A1A1A; padding: 20px; text-align: center; border-bottom: 4px solid #E63946;">
-      <h2 style="color: #ffffff; margin: 0; font-size: 24px;">Vigitec Panama</h2>
-      <p style="color: #aaaaaa; margin: 5px 0 0 0; font-size: 14px;">Nueva Solicitud de Cotizaci&oacute;n</p>
+      <h2 style="color: #ffffff; margin: 0; font-size: 24px;">Formulario de Contacto</h2>
+      <p style="color: #aaaaaa; margin: 5px 0 0 0; font-size: 14px;">Nuevo Mensaje Web</p>
     </div>
     <div style="padding: 20px; background-color: #ffffff;">
       <p style="font-size: 16px; margin-bottom: 20px;">Has recibido una nueva solicitud de cotizaci&oacute;n desde la web.</p>
