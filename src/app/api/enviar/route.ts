@@ -49,14 +49,14 @@ export async function POST(request: Request) {
     const emailResponse = await resend.emails.send({
       from: 'Vigitec Web <onboarding@resend.dev>',
       to: destination,
-      subject: 'Vigitec - Nueva Solicitud',
+      subject: `Vigitec - Cotización Web #${Math.floor(Math.random() * 10000)}`,
       html: emailHtml,
       text: `NUEVA SOLICITUD - Nombre: ${cliente.nombre} | Telefono: ${cliente.telefono} | Interes: ${Servicio}. Favor contactar al cliente.`
     });
 
     if (emailResponse.error) {
       console.error('Error de Resend:', emailResponse.error);
-      return NextResponse.json({ success: false, message: 'Error enviando el correo.' }, { status: 500 });
+      return NextResponse.json({ success: false, message: 'Error de Resend: ' + emailResponse.error.message }, { status: 500 });
     }
 
     return NextResponse.json({ success: true, message: 'Cotizacion enviada exitosamente.' });
