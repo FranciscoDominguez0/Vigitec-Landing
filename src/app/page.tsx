@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import SkeletonImage from '@/components/SkeletonImage';
+import HeroImageCarousel from '@/components/HeroImageCarousel';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -40,27 +41,7 @@ export default function Home() {
           
           {/* Contenido Derecho (Imagen Decorativa) */}
           <div className="w-full lg:w-1/2 relative">
-            <div className="relative w-full max-w-md mx-auto">
-              {/* Cuadro Decorativo Superior */}
-              <div className="absolute -top-6 -left-6 w-24 h-24 border-4 border-accent rounded-3xl opacity-50"></div>
-              <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-primary rounded-full z-0"></div>
-              
-              {/* Imagen Principal del Técnico */}
-              <div className="relative z-10 w-full aspect-[4/5] overflow-hidden rounded-[2rem] rounded-tr-none shadow-2xl border-4 border-secondary">
-                <SkeletonImage src="/assets/img/hero/tecnico_instalador_v2.webp" alt="Técnico Instalando Sistema de Seguridad" fill priority className="object-cover" />
-              </div>
-              
-              {/* Etiqueta Flotante de Soporte 24/7 */}
-              <div className="absolute bottom-4 left-4 sm:bottom-10 sm:-left-8 lg:-left-20 bg-white p-4 rounded-2xl shadow-premium z-20 flex items-center space-x-4">
-                <div className="bg-green-100 p-3 rounded-full text-green-600">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-gray-900">Soporte 24/7</p>
-                  <p className="text-xs text-gray-500">Garantizado</p>
-                </div>
-              </div>
-            </div>
+            <HeroImageCarousel />
           </div>
           
         </div>

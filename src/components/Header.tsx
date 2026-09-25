@@ -15,7 +15,7 @@ export default function Header() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <Image src="/assets/img/hero/vigitec-logo.webp" alt="Vigitec Panama" width={200} height={40} className="h-10 w-auto" />
+          <Image src="/assets/img/hero/vigitec-logo.webp" alt="Vigitec Panama" width={200} height={40} className="h-10 w-auto" style={{ width: 'auto', height: 'auto' }} />
         </Link>
         
         {/* Menú para Computadoras */}
