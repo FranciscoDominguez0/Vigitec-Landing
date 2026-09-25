@@ -10,8 +10,9 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-primary/95 backdrop-blur-md py-4 sticky top-0 z-50 shadow-2xl border-b border-gray-800">
-      <div className="container mx-auto px-4 max-w-7xl flex items-center justify-between">
+    <>
+      <header className="bg-primary/95 backdrop-blur-md py-4 sticky top-0 z-50 shadow-2xl border-b border-gray-800">
+        <div className="container mx-auto px-4 max-w-7xl flex items-center justify-between">
         
         {/* Logo */}
         <Link href="/" className="flex items-center">
@@ -69,5 +70,6 @@ export default function Header() {
         </div>
       )}
     </header>
+    </>
   );
 }

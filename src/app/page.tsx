@@ -39,7 +39,6 @@ export default function Home() {
             </div>
           </div>
           
-          {/* Contenido Derecho (Imagen Decorativa) */}
           <div className="w-full lg:w-1/2 relative">
             <HeroImageCarousel />
           </div>
