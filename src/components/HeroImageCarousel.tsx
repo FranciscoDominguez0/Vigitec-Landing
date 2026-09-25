@@ -71,7 +71,7 @@ export default function HeroImageCarousel() {
         })}
 
         {/* Indicadores (Dots) */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+        <div className="absolute bottom-4 right-6 z-20 flex space-x-2">
           {slides.map((_, index) => (
             <button
               key={index}
