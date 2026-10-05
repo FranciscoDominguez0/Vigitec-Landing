@@ -18,21 +18,28 @@ export async function POST(request: Request) {
     const Email = (body.Email || body.email || '').trim();
     const Servicio = (body.Servicio || body.servicio || '').trim();
     const Detalles = (body.Detalles || body.detalles || '').trim();
-    const recaptchaResponse = body.recaptchaResponse || '';
+    const turnstileResponse = body.turnstileResponse || '';
 
-    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    const secretKey = process.env.TURNSTILE_SECRET_KEY;
     
-    if (!recaptchaResponse) {
-      return NextResponse.json({ success: false, message: 'Falta validar el reCAPTCHA.' }, { status: 400 });
+    if (!turnstileResponse) {
+      return NextResponse.json({ success: false, message: 'Falta completar el desafío de seguridad.' }, { status: 400 });
     }
 
-    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaResponse}`;
+    const verifyUrl = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
     
-    const recaptchaRes = await fetch(verifyUrl, { method: 'POST' });
-    const recaptchaData = await recaptchaRes.json();
+    const turnstileRes = await fetch(verifyUrl, { 
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        secret: secretKey || '',
+        response: turnstileResponse
+      })
+    });
+    const turnstileData = await turnstileRes.json();
 
-    if (!recaptchaData.success) {
-      return NextResponse.json({ success: false, message: 'Fallo la verificacion de reCAPTCHA.' }, { status: 400 });
+    if (!turnstileData.success) {
+      return NextResponse.json({ success: false, message: 'Fallo la verificación de seguridad.' }, { status: 400 });
     }
 
     const destination = process.env.SMTP_DESTINATION || 'dominguezf225@gmail.com';

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, FormEvent, useEffect, useRef } from "react";
+import { useState, FormEvent } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { useSearchParams } from "next/navigation";
 
 export default function CotizacionSolarForm() {
@@ -28,44 +29,16 @@ export default function CotizacionSolarForm() {
 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const recaptchaRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const renderCaptcha = () => {
-      const grecaptcha = window.grecaptcha;
-      if (grecaptcha && grecaptcha.render && recaptchaRef.current && !recaptchaRef.current.hasChildNodes()) {
-        try {
-          grecaptcha.render(recaptchaRef.current, {
-            sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "",
-            theme: 'dark'
-          });
-        } catch {
-          // Ignorar si ya se renderizó
-        }
-      }
-    };
-
-    // Callback global llamado por el script de Google al cargar
-    window.onloadCallback = renderCaptcha;
-
-    // Ejecutar inmediatamente por si el script ya estaba cargado previamente
-    renderCaptcha();
-  }, []);
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     
-    const grecaptcha = window.grecaptcha;
-    let recaptchaResponse = "";
-    
-    if (grecaptcha) {
-      recaptchaResponse = grecaptcha.getResponse();
-      if (recaptchaResponse.length === 0) {
-        setErrorMessage('Por favor, marque la casilla de "No soy un robot" antes de enviar la cotización.');
-        setStatus("error");
-        setTimeout(() => setStatus("idle"), 4000);
-        return;
-      }
+    if (!turnstileToken) {
+      setErrorMessage('Por favor, marque la casilla de seguridad antes de enviar la cotización.');
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 4000);
+      return;
     }
 
     setStatus("loading");
@@ -74,7 +47,7 @@ export default function CotizacionSolarForm() {
       const response = await fetch('/api/enviar-solar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, 'g-recaptcha-response': recaptchaResponse })
+        body: JSON.stringify({ ...formData, 'cf-turnstile-response': turnstileToken })
       });
       
       const data = await response.json();
@@ -84,13 +57,11 @@ export default function CotizacionSolarForm() {
         setFormData({
           Nombre: "", Cédula: "", Teléfono: "", Dirección: "", Servicio: "", Anos: ""
         });
-        if (grecaptcha) grecaptcha.reset();
         
         setTimeout(() => setStatus("idle"), 5000);
       } else {
         setErrorMessage(data.message || 'Error de seguridad. Por favor intente nuevamente.');
         setStatus("error");
-        if (grecaptcha) grecaptcha.reset();
         setTimeout(() => setStatus("idle"), 4000);
       }
     } catch (error) {
@@ -159,9 +130,13 @@ export default function CotizacionSolarForm() {
             </div>
           </div>
           
-          {/* reCAPTCHA Oficial de Google (Renderizado Explícito) */}
+          {/* Cloudflare Turnstile */}
           <div className="flex items-center justify-center pt-2">
-            <div ref={recaptchaRef} suppressHydrationWarning></div>
+            <Turnstile
+              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+              onSuccess={(token) => setTurnstileToken(token)}
+              options={{ theme: "dark" }}
+            />
           </div>
 
           <div className="pt-2">

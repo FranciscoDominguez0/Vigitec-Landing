@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     }
 
     const resend = new Resend(resendApiKey);
-    const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY || '';
+    const turnstileSecretKey = process.env.TURNSTILE_SECRET_KEY || '';
     
     const body = await req.json();
 
@@ -24,21 +24,21 @@ export async function POST(req: Request) {
     
     const servicio = (body.Servicio || '').trim();
     const anos = parseInt(body.Anos || '0', 10);
-    const recaptchaResponse = body['g-recaptcha-response'] || '';
+    const turnstileResponse = body['cf-turnstile-response'] || '';
 
-    if (!recaptchaResponse) {
-      return NextResponse.json({ success: false, message: 'Por favor, marque la casilla de "No soy un robot".' });
+    if (!turnstileResponse) {
+      return NextResponse.json({ success: false, message: 'Por favor, complete el desafío de seguridad.' });
     }
 
-    // Verificar reCAPTCHA
-    if (recaptchaSecretKey) {
-      const verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
+    // Verificar Turnstile
+    if (turnstileSecretKey) {
+      const verifyUrl = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
       const verifyResponse = await fetch(verifyUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
-          secret: recaptchaSecretKey,
-          response: recaptchaResponse
+          secret: turnstileSecretKey,
+          response: turnstileResponse
         })
       });
       const verifyData = await verifyResponse.json();

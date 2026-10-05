@@ -1,45 +1,20 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
-import Script from 'next/script';
+import { useState } from 'react';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 export default function Cotizacion() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const captchaRef = useRef<HTMLDivElement>(null);
-
-  const handleScriptLoad = () => {
-    if (window.grecaptcha) {
-      window.grecaptcha.ready(() => {
-        if (captchaRef.current && captchaRef.current.children.length === 0) {
-          try {
-            window.grecaptcha.render(captchaRef.current, {
-              sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-              theme: 'dark'
-            });
-          } catch (err) {
-            console.error('Error renderizando reCAPTCHA:', err);
-          }
-        }
-      });
-    }
-  };
-
-  useEffect(() => {
-    // Si regresamos a esta página y el script de reCAPTCHA ya estaba cargado, lo renderizamos manualmente.
-    if (window.grecaptcha) {
-      handleScriptLoad();
-    }
-  }, []);
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    // Verificar reCAPTCHA
-    const recaptchaResponse = window.grecaptcha?.getResponse();
-    if (!recaptchaResponse) {
-      setError('Por favor, marque la casilla de "No soy un robot" antes de enviar la cotización.');
+    // Verificar Turnstile
+    if (!turnstileToken) {
+      setError('Por favor, complete el desafío de seguridad antes de enviar la cotización.');
       return;
     }
 
@@ -53,7 +28,7 @@ export default function Cotizacion() {
       Email: formData.get('Email'),
       Servicio: formData.get('Servicio'),
       Detalles: formData.get('Detalles'),
-      recaptchaResponse
+      turnstileResponse: turnstileToken
     };
 
     try {
@@ -74,17 +49,11 @@ export default function Cotizacion() {
       setError('Ocurrió un error de red. Intenta nuevamente.');
     } finally {
       setIsSubmitting(false);
-      window.grecaptcha?.reset();
     }
   };
 
   return (
     <>
-      <Script 
-        src="https://www.google.com/recaptcha/api.js?render=explicit" 
-        strategy="afterInteractive" 
-        onLoad={handleScriptLoad}
-      />
       <section className="py-10 relative overflow-hidden bg-[url('/assets/img/hero/servicios_bg.png')] bg-cover bg-center bg-no-repeat bg-fixed min-h-[calc(100vh-100px)]">
         {/* Destello rojo decorativo sutil */}
         <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[100px] pointer-events-none hidden lg:block"></div>
@@ -162,9 +131,13 @@ export default function Cotizacion() {
                       <textarea rows={4} name="Detalles" className="w-full p-4 bg-[#111111] border border-gray-700 text-white focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all shadow-inner resize-none placeholder-gray-500 font-medium rounded" placeholder="Mensaje...*" required></textarea>
                     </div>
                     
-                    {/* reCAPTCHA Oficial de Google (Montado dinámicamente) */}
+                    {/* Cloudflare Turnstile */}
                     <div className="flex items-center justify-center pt-2 min-h-[78px]">
-                      <div ref={captchaRef} suppressHydrationWarning></div>
+                      <Turnstile
+                        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                        onSuccess={(token) => setTurnstileToken(token)}
+                        options={{ theme: "dark" }}
+                      />
                     </div>
                     
                     <div className="pt-2">

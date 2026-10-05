@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function CotizacionSolarPage() {
   return (
     <>
-      <Script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" strategy="lazyOnload" />
+
       <section className="py-10 relative overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed" style={{ backgroundImage: "url('/assets/img/hero/servicios_bg.png')" }}>
         <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[100px] pointer-events-none hidden lg:block"></div>
 
