@@ -21,6 +21,7 @@ const slides = [
     isLink: true,
     href: "/renovable-solar",
     className: "object-contain bg-black", 
+    hasFade: true,
   }
 ];
 
