@@ -15,7 +15,7 @@ const slides = [
   },
   {
     id: 2,
-    src: "/assets/img/hero/flayer_panel_solar.png",
+    src: "/assets/img/hero/flayer_panel_solar_v2.png",
     alt: "Promoción Paneles Solares",
     duration: 7000, 
     isLink: true,
