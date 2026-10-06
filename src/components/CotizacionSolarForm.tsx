@@ -133,8 +133,14 @@ export default function CotizacionSolarForm() {
           {/* Cloudflare Turnstile */}
           <div className="flex items-center justify-center pt-2">
             <Turnstile
+              id="turnstile-solar-form"
               siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
               onSuccess={(token) => setTurnstileToken(token)}
+              onError={() => {
+                setTurnstileToken("");
+                setErrorMessage("Error cargando la seguridad. Recargue la página.");
+              }}
+              onExpire={() => setTurnstileToken("")}
               options={{ theme: "dark" }}
             />
           </div>
