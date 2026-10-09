@@ -3,10 +3,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
+    # Se elimina "ports", Nginx PM enrutará el tráfico internamente por el puerto 3000
     environment:
       - NODE_ENV=production
     env_file:
       - .env
     restart: unless-stopped
+    networks:
+      - npm_network # Conectada a la red de Nginx Proxy Manager
+
+networks:
+  npm_network:
+    external: true # Red externa que ya compartes con Nginx Proxy Manager
